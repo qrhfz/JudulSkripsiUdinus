@@ -6,39 +6,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.4.0/json2html.min.js"></script>
+
+    <!--<script src="https://leewannacott.github.io/table-sort-js/table-sort.js"></script>-->
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css">
 
 </head>
 
 <body>
-
-
     <div class="container">
         <p>
-        <table id="placar" class="table table-condensed  table-bordered">
+        <table id="placar" class="table table-condensed  table-bordered " data-toggle="table"
+            data-url="judulSkripsi.json" data-pagination="true" data-search="true">
             <thead>
                 <tr>
-
-                    <th>NIM</th>
-                    <th>Judul</th>
-                    <th>Dosen</th>
+                    <th data-sortable="true" data-field="nim">NIM</th>
+                    <th data-sortable="true" data-field="judul">Judul</th>
+                    <th data-sortable="true" data-field="dosen">Dosen</th>
                 </tr>
             </thead>
             <tbody></tbody>
         </table>
     </div>
-
-
-
-
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.4.0/json2html.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
 
-<script>
+<!-- <script>
     $.getJSON("judulSkripsi.json", function (json) {
         var transform = {
             tag: 'tr',
@@ -55,6 +59,6 @@
         }; // this will show the info it in firebug console
         $('#placar > tbody ').json2html(json, transform);
     });   
-</script>
+</script> -->
 
 </html>
