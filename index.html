@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.4.0/json2html.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.4.0/json2html.min.js"></script>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
@@ -20,17 +20,17 @@
 
     <div class="container">
         <p>
-            <table id="placar" class="table table-condensed  table-bordered">
-                <thead>
-                    <tr>
-                        
-                        <th>NIM</th>
-                        <th>Judul</th>
-                        <th>Dosen</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+        <table id="placar" class="table table-condensed  table-bordered">
+            <thead>
+                <tr>
+
+                    <th>NIM</th>
+                    <th>Judul</th>
+                    <th>Dosen</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>
 
 
@@ -41,26 +41,20 @@
 <script>
     $.getJSON("judulSkripsi.json", function (json) {
         var transform = {
-        tag: 'tr',
-        children: [{
-            "tag": "td",
-            "html": "${nim}"
-        }, {
-            "tag": "td",
-            "html": "${judul}"
-        }, {
-            "tag": "td",
-            "html": "${dosen}"
-        },]
-    }; // this will show the info it in firebug console
+            tag: 'tr',
+            children: [{
+                "tag": "td",
+                "html": "${nim}"
+            }, {
+                "tag": "td",
+                "html": "${judul}"
+            }, {
+                "tag": "td",
+                "html": "${dosen}"
+            },]
+        }; // this will show the info it in firebug console
         $('#placar > tbody ').json2html(json, transform);
-    });
-
-    
-
-    
-
-   
+    });   
 </script>
 
 </html>
