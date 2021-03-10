@@ -3,6 +3,11 @@ const $ = require('cheerio');
 var fs = require('fs');
 
 const url = 'https://dinus.ac.id/detailstaf/';
+const listRIPDosen = [
+    'https://web.archive.org/web/20200811092204/https://dinus.ac.id/detailstaf/0686.11.1994.058', //Bu astuti
+    'https://web.archive.org/web/20200922084615/https://dinus.ac.id/detailstaf/0686.11.2009.354', //pak wij
+    'https://web.archive.org/web/20201202215830/https://dinus.ac.id/detailstaf/0686.11.2006.336', //pak andik
+]
 const listDosen = [
     '0686.11.1996.106', // Pak Budi Raharjo
     '0686.11.2009.374', // Pak Sendi
@@ -60,10 +65,23 @@ let listSkripsi = []
 
 printListSkripsi()
 
-async function getListSkripsi(listDosen) {
+async function getListSkripsi() {
     
     for (dosen of listDosen) {
         await rp(url + dosen)
+        .then(function (html) {
+            //success!
+            $('div#messages>table>tbody>tr', html).each(function (i, elem) {
+                listSkripsi.push(extractRow($(this)))
+            })
+        })
+        .catch(function (err) {
+            //handle error
+            console.log(err)
+        })
+    }
+    for (dosen of listRIPDosen) {
+        await rp(dosen)
         .then(function (html) {
             //success!
             $('div#messages>table>tbody>tr', html).each(function (i, elem) {
