@@ -1,7 +1,7 @@
 const rp = require('request-promise');
 const $ = require('cheerio');
 var fs = require('fs');
-
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 const url = 'https://dinus.ac.id/detailstaf/';
 const listRIPDosen = [
     'https://web.archive.org/web/20200811092204/https://dinus.ac.id/detailstaf/0686.11.1994.058', //Bu astuti
@@ -61,18 +61,19 @@ const listDosen = [
     '0686.11.2017.692', //abas
 ]
 
-let listSkripsi = []
+
 
 printListSkripsi()
 
 async function getListSkripsi() {
-    
+    let listSkripsi = []
     for (dosen of listDosen) {
         await rp(url + dosen)
         .then(function (html) {
             //success!
             $('div#messages>table>tbody>tr', html).each(function (i, elem) {
                 listSkripsi.push(extractRow($(this)))
+                // console.log(extractRow($(this)))
             })
         })
         .catch(function (err) {
@@ -93,14 +94,16 @@ async function getListSkripsi() {
             console.log(err)
         })
     }
+
+    return listSkripsi
 }
 
 async function printListSkripsi() {
-    await getListSkripsi(listDosen).then(() => {
-        var json = JSON.stringify(listSkripsi)
-    
-        fs.writeFile('judulSkripsi.json', json, 'utf8', (_)=>{console.log('asik')})
-    })
+    var listSkripsi = await getListSkripsi()
+
+    var json = JSON.stringify(listSkripsi)
+
+    fs.writeFile('judulSkripsi.json', json, 'utf8', (_)=>{console.log('sukses')})
 
 }
 
